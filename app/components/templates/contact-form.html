@@ -1,0 +1,86 @@
+<h3 class="text-center">
+    {{ pageTitle ? pageTitle: "Contact form" }}
+</h3>
+<form #f1="ngForm" class="form-horizontal" name="contact-form">
+    <div class="form-group">
+        <label for="firstname" class="col-sm-4 control-label">Firstname</label>
+        <div class="col-sm-8">
+            <input #fname="ngModel" name="firstname" required minlength="3" maxlength="20" [(ngModel)]="contact.firstname" type="text"
+                class="form-control" id="firstname" placeholder="Firstname">
+            <div *ngIf="fname.errors && (fname.dirty || fname.touched)">
+                <div [hidden]="!fname.errors.required" class="err">Firstname is mandatory!</div>
+                <div [hidden]="!fname.errors.minlength" class="err">Firstname must be atleast 3 letters</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="lastname" class="col-sm-4 control-label">Lastname</label>
+        <div class="col-sm-8">
+            <input #lname="ngModel" name="lastname" minlength="3" maxlength="20" [(ngModel)]="contact.lastname" type="text" class="form-control"
+                id="lastname" placeholder="Lastname">
+            <div *ngIf="lname.errors && (lname.dirty || lname.touched)">
+                <div [hidden]="!lname.errors.minlength" class="err">Lastname must be atleast 3 letters</div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label">Gender</label>
+        <div class="col-sm-8">
+            <label>
+                <input name="gender" [(ngModel)]="contact.gender" type="radio" value="Male"> Male</label>
+            <label>
+                <input name="gender" [(ngModel)]="contact.gender" type="radio" value="Female"> Female</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="dob" class="col-sm-4 control-label">Date of birth</label>
+        <div class="col-sm-8">
+            <input name="dob" [(ngModel)]="contact.dob" type="text" class="form-control" id="dob" placeholder="Date of birth">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="email" class="col-sm-4 control-label">Email address</label>
+        <div class="col-sm-8">
+            <input #eml="ngModel" name="email" email [(ngModel)]="contact.email" required type="email" class="form-control" id="email"
+                placeholder="Email address">
+            <div *ngIf="eml.errors && (eml.dirty || eml.touched)">
+                <div [hidden]="!eml.errors.required" class="err">Email id is required!</div>
+                <div [hidden]="!eml.errors.email" class="err">Invalid value for email address</div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="phone" class="col-sm-4 control-label">Phone number</label>
+        <div class="col-sm-8">
+            <input name="phone" required pattern="[0-9]{10,13}" [(ngModel)]="contact.phone" type="text" class="form-control" id="phone"
+                placeholder="Phone number">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="city" class="col-sm-4 control-label">City</label>
+        <div class="col-sm-8">
+            <input name="city" [(ngModel)]="contact.city" type="text" class="form-control" id="city" placeholder="City">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="state" class="col-sm-4 control-label">State</label>
+        <div class="col-sm-8">
+            <input name="state" [(ngModel)]="contact.state" type="text" class="form-control" id="state" placeholder="State">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="country" class="col-sm-4 control-label">Country</label>
+        <div class="col-sm-8">
+            <input name="country" [(ngModel)]="contact.country" type="text" class="form-control" id="country" placeholder="Country">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-8 col-sm-offset-4">
+            <button [disabled]="!f1.valid" type="button" (click)="save()" class="btn btn-{{ f1.valid ? 'primary' : 'danger' }}">Save</button>
+        </div>
+    </div>
+
+</form>

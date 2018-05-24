@@ -1,0 +1,18 @@
+<!-- ngModel corresponds to a member variable of this component object.
+If such a member does not exist, a new variable will be created as a member 
+of this component object -->
+
+<input type="text" [(ngModel)]="searchStr" class="form-control">
+
+<p class="lead" *ngIf="searchStr">Showing data containing '{{searchStr}}'...</p>
+
+<ul class="list-group">
+    <li *ngFor="let c of (contactList | filter: searchStr) " 
+        [routerLink] = "['/view-contact', c.id]"
+        (click) = "saveInSession(c)"
+        class="list-group-item">
+        {{c.gender | title }} {{c.firstname}} {{c.lastname}} 
+
+        <span class="pull-right">{{c.city}}</span>
+    </li>
+</ul>
